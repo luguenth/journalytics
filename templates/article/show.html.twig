@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<!-- show article detail twig -->
+<div class="example-wrapper">
+    <div>
+        <div>
+            <h2>{{ article.title }}</h2>
+            <p>Published in: </p>
+            {% for newspaper in article.newspapers %}
+                <a href="{{ path('app_newspaper_show', {id: newspaper.id}) }}">{{ newspaper.name }}</a> 
+            {% endfor %}
+            <p>Written by: </p>
+            {% for journalist in article.journalists %}
+                <a href="{{ path('app_journalist_show', {id: journalist.id}) }}">{{ journalist.name }}</a> 
+            {% endfor %}
+            <p>{{ article.description | raw }}</p>
+            <p>{{ article.date | date('d.m.Y H:i') }}</p>
+            <p>
+            
+            </p>
+            <p><a href="{{ article.link }}">Go to article</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

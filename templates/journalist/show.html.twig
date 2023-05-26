@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+    <h2>{{ journalist.name }}</h2>
+
+    <p>Articles by {{ journalist.name }}:</p>
+    {%include 'article/_list.html.twig' with {'articles': journalist.articles} %}
+    {% if newspapers|length == 0 %}
+        <p>Journalist {{ journalist.name }} has not written for any newspapers</p>
+    {% else %}
+        <p>Journalist {{ journalist.name }} has written for {{ newspapers|length }} newspaper{% if newspapers|length > 1 %}s{% endif %}:</p>
+        {%include 'newspaper/_list.html.twig' with {'newspapers': newspapers} %}
+    {% endif %}
+    
+    <p>Journalist {{ journalist.name }} has written {{ journalist.articles|length }} articles</p>
+    <p>Categories {{ journalist.name }} has written about:</p>
+
+    <p>Go back to articles <a href="{{ path('app_article') }}">here</a></p>
+
+{% endblock %}

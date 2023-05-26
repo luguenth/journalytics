@@ -1,0 +1,25 @@
+feeds:
+    - url: https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml
+      manual_lookup: "Von: "
+      cleanup_rules:
+        replace: ["Von ", ""] 
+    - url: https://www.welt.de/feeds/latest.rss
+      manual_lookup: false
+      cleanup_rules:
+        replace: null
+    - url: https://newsfeed.zeit.de/
+      manual_lookup: false
+      cleanup_rules:
+        replace: ["ZEIT ONLINE:(.)* -", ""]
+    - url: https://rss.sueddeutsche.de/alles
+      manual_lookup: "von "
+      cleanup_rules:
+        replace: ["Von ", ""]
+    - url: https://www.rnd.de/arc/outboundfeeds/rss/
+      manual_lookup: false
+      cleanup_rules:
+        replace: null
+    - url: https://www.t-online.de/feed.rss
+      manual_lookup: false
+      cleanup_rules:
+        replace: null

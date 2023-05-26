@@ -14,6 +14,20 @@
         {% endblock %}
     </head>
     <body>
+    <div>
+        <nav id="nav-bar">
+            <ul id="nav-user">
+                <li><a href="#">Logout</a></li>
+            </ul>
+            <ul id="nav-main">
+                <li><a href="{{ path('app_article') }}">Articles</a></li>
+                <li><a href="{{ path('app_journalist') }}">Journalists</a></li>
+                <li><a href="{{ path('app_newspaper') }}">Newspapers</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
         {% block body %}{% endblock %}
+    </div>
     </body>
 </html>

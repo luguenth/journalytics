@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Newspaper!{% endblock %}
+
+{% block body %}
+    <h1>{{ newspaper.name }}</h1>
+
+    <p> All Journalists: </p>
+    <ul>
+        {% include 'journalist/_list.html.twig' with {'journalists': journalists} %}
+    </ul>
+
+    <p> All Articles: </p>
+    <ul>
+        {% include 'article/_list.html.twig' with {'articles': newspaper.articles} %}
+    </ul>
+{% endblock %}

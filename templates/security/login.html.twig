@@ -1,0 +1,14 @@
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>🔒 Log in</h1>
+
+<p>
+    Please enter your email address to receive a link to log in. This way, you don't need to remember a password.
+</p>
+<form action="{{ path('app_login') }}" method="POST">
+    <input type="email" name="email">
+    <button type="submit">Send Login Link</button>
+</form>
+{% endblock %}

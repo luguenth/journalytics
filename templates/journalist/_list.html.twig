@@ -1,0 +1,14 @@
+<table>
+    <thead>
+        <tr>
+            <th>Journalists</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for journalist in journalists %}
+        <tr>
+            <td> <a href="{{ path('app_journalist_show', { 'id': journalist.id }) }}">{{ journalist.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

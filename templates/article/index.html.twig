@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>📝 Articles</h1>
+
+    <p>Now we iterate over each article and display its title:</p>
+    {% include 'article/_list.html.twig' with {'articles': articles} %}
+</div>
+{% endblock %}

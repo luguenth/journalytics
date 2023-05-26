@@ -1,0 +1,61 @@
+table th {
+    background-color: #eee;
+    font-weight: bold;
+}
+
+/* margin at table bottom */
+table td {
+    padding: 50px;
+}
+
+/* hide bulletpoints in table data */
+table td ul {
+    list-style-type: none;
+}
+
+/* white on buttons */
+button {
+    color: white !important;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* align children to the right */
+    margin: 0px auto;
+    max-width: 960px;
+    width: 95%;
+}
+#nav-user {
+    background-color: red;
+    width: 100%;
+    text-align: right;
+}
+nav label {
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+}
+nav ul li {
+}
+nav * {
+    display: inline-block;
+}
+@media screen and (max-width: 640px) {
+    nav {
+        text-align: center;
+    }
+    nav > * {
+        display: block;
+    }
+    nav ul {
+        float: none;
+        margin-top: 15px;
+    }
+}

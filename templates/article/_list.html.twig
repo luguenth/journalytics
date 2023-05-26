@@ -1,0 +1,36 @@
+<table>
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Article Title</th>
+            <th>Journalists</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <td title="{{ article.date|date("d.m.Y H:i") }}">
+                <!-- if article is published today just who time, else just show date -->
+                {% if article.date|date("d.m.Y") == "now"|date("d.m.Y") %}
+                    {{ article.date|date("H:i") }}
+                {% else %}
+                    {{ article.date|date("d.m.Y") }}
+                {% endif %}
+
+            </td>
+            <td>
+            
+            <a href="{{ path('app_article_show', {id: article.id}) }}">{{ article.title }}</a></td>
+            <td>
+                <ul>
+                    {% for journalist in article.journalists %}
+                    <li>
+                        <a href="{{ path('app_journalist_show', {id: journalist.id}) }}">{{ journalist.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
