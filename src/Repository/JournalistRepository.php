@@ -52,4 +52,15 @@ class JournalistRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    public function getAllJournalistsAndTheNewspapersTheyWriteFor(): array
+    {
+        $query = $this->createQueryBuilder('j')
+            ->select('j')
+            ->leftJoin('j.articles', 'a')
+            ->leftJoin('a.newspapers', 'n')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

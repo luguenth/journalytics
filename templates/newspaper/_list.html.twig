@@ -1,12 +1,16 @@
 <table>
     <thead>
         <tr>
+            <th></th>
             <th>Newspapers</th>
         </tr>
     </thead>
     <tbody>
         {% for newspaper in newspapers %}
         <tr>
+            <td> 
+            {% include 'newspaper/_tag.html.twig' with {newspaper: newspaper} %}
+            </td>
             <td> <a href="{{ path('app_newspaper_show', {id: newspaper.id}) }}">{{ newspaper.name }}</a></td>
         </tr>
         {% endfor %}

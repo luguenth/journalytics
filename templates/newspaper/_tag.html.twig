@@ -1,0 +1,22 @@
+{% if newspaper.thumbnailLetter %}
+<div class="thumbnailLetter" style="background-color: {{ newspaper.ciColor }};">{{ newspaper.thumbnailLetter }}</div>
+{% else %} 
+<div class="thumbnailLetter" style="background-color: yellow;">{{ newspaper.name|first }}</div>
+{% endif %}
+
+{% block stylesheets %}
+    <style>
+        .thumbnailLetter {
+            width: 25px;
+            height: 25px;
+            border-radius: 25%;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            line-height: 25px;
+            margin-right: 10px;
+            float: left;
+        }
+    </style>
+{% endblock %}

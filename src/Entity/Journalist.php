@@ -79,6 +79,10 @@ class Journalist
      */
     public function getArticles(): Collection
     {
+        $iterator = $this->articles->getIterator();
+        $iterator->uasort(function (Article $a, Article $b) {
+            return $a->getDate() <=> $b->getDate();
+        });
         return $this->articles;
     }
 
@@ -99,5 +103,14 @@ class Journalist
         }
 
         return $this;
+    }
+
+    public function getAllNewspapers(): array
+    {
+        $newspapers = [];
+        foreach ($this->getArticles() as $article) {
+            $newspapers = array_merge($newspapers, $article->getNewspapers()->toArray());
+        }
+        return $newspapers;
     }
 }

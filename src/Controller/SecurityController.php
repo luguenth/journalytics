@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkNotification;
+use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\User;
 
@@ -18,15 +19,23 @@ class SecurityController extends AbstractController
 {
 
     #[Route('/login', name: 'app_login')]
-    public function requestLoginLink(NotifierInterface $notifier, LoginLinkHandlerInterface $loginLinkHandler, UserRepository $userRepository, Request $request)    
+    public function requestLoginLink(
+        NotifierInterface $notifier,
+        LoginLinkHandlerInterface $loginLinkHandler, 
+        UserRepository $userRepository, 
+        EntityManagerInterface $entityManager,
+        Request $request)    
     {
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
             $user = $userRepository->findOneBy(['email' => $email]);
             if (!$user) {
-                // create a fake user to prevent user enumeration
+                // create an unactivated user
                 $user = new User();
                 $user->setEmail($email);
+                $user->setActivated(false);
+                $entityManager->persist($user);
+                $entityManager->flush();
             }
 
             $loginLinkDetails = $loginLinkHandler->createLoginLink($user);
@@ -51,4 +60,10 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig');
     }
 
+    #[Route('/logout', name: 'app_logout')]
+    public function logout()
+    {
+        throw new \LogicException('This method can be blank - 
+            it will be intercepted by the logout key on your firewall.');
+    }
 }

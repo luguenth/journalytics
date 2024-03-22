@@ -21,6 +21,15 @@ class Newspaper
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'newspapers')]
     private Collection $articles;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagePath = null;
+
+    #[ORM\Column(length: 3, nullable: true)]
+    private ?string $thumbnailLetter = null;
+
+    #[ORM\Column(length: 15, nullable: true)]
+    private ?string $ciColor = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -48,6 +57,11 @@ class Newspaper
      */
     public function getArticles(): Collection
     {
+        // sort articles by date
+        $iterator = $this->articles->getIterator();
+        $iterator->uasort(function (Article $a, Article $b) {
+            return $a->getDate() <=> $b->getDate();
+        });
         return $this->articles;
     }
 
@@ -66,6 +80,42 @@ class Newspaper
         if ($this->articles->removeElement($article)) {
             $article->removeNewspaper($this);
         }
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(?string $imagePath): self
+    {
+        $this->imagePath = $imagePath;
+
+        return $this;
+    }
+
+    public function getThumbnailLetter(): ?string
+    {
+        return $this->thumbnailLetter;
+    }
+
+    public function setThumbnailLetter(?string $thumbnailLetter): self
+    {
+        $this->thumbnailLetter = $thumbnailLetter;
+
+        return $this;
+    }
+
+    public function getCiColor(): ?string
+    {
+        return $this->ciColor;
+    }
+
+    public function setCiColor(?string $ciColor): self
+    {
+        $this->ciColor = $ciColor;
 
         return $this;
     }

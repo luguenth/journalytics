@@ -16,13 +16,19 @@
     <body>
     <div>
         <nav id="nav-bar">
+        {% if app.user %}
             <ul id="nav-user">
-                <li><a href="#">Logout</a></li>
+                <!-- if not logged in -->
+                <li><a href="{{ path('app_logout') }}">Logout</a></li>
             </ul>
+        {% endif %}
             <ul id="nav-main">
                 <li><a href="{{ path('app_article') }}">Articles</a></li>
                 <li><a href="{{ path('app_journalist') }}">Journalists</a></li>
                 <li><a href="{{ path('app_newspaper') }}">Newspapers</a></li>
+                {% if not app.user %}
+                    <li><a href="{{ path('app_login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </div>

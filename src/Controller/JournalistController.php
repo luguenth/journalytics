@@ -24,8 +24,8 @@ class JournalistController extends AbstractController
     public function index(): Response
     {
         // Get all the journalists from the database
-        $journalists = $this->entityManager->getRepository(Journalist::class)->findAll();
-
+        $journalists = $this->entityManager->getRepository(Journalist::class)->findBy([], ['name' => 'ASC']);
+        
         // Render the journalist page
         return $this->render('journalist/index.html.twig', [
             'journalists' => $journalists,

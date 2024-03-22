@@ -3,10 +3,6 @@ table th {
     font-weight: bold;
 }
 
-/* margin at table bottom */
-table td {
-    padding: 50px;
-}
 
 /* hide bulletpoints in table data */
 table td ul {
@@ -15,7 +11,7 @@ table td ul {
 
 /* white on buttons */
 button {
-    color: white !important;
+    color: white;
 }
 
 .font-weight-bold {
@@ -59,3 +55,29 @@ nav * {
         margin-top: 15px;
     }
 }
+
+
+/* smal shadow on every tr hover except table header */
+table tbody tr:hover {
+    box-shadow: 4px 4px 1px 0px red;
+    outline: 2px solid blue;
+}
+
+/* hard shadow for every h2 */
+h1 {
+    color: blue;
+    text-shadow: 3px 3px 1px red;
+}
+
+table th {
+    background-color: blue;
+    font-weight: bold;
+    color: white;
+    outline: 2px solid blue;
+}
+
+table td, table th {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 255, 0.171);
+  }

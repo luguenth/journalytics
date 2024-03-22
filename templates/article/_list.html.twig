@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Time</th>
+            <th>NP</th>
             <th>Article Title</th>
             <th>Journalists</th>
         </tr>
@@ -18,6 +19,10 @@
                 {% endif %}
 
             </td>
+            <td>
+            {% for newspaper in article.newspapers %}
+                {% include 'newspaper/_tag.html.twig' with { 'newspaper': newspaper } %}
+            {% endfor %}
             <td>
             
             <a href="{{ path('app_article_show', {id: article.id}) }}">{{ article.title }}</a></td>

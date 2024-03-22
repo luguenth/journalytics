@@ -4,7 +4,9 @@
 
 {% block body %}
     <h1>{{ newspaper.name }}</h1>
-
+    {% if app.user %}
+        <a href="{{ path('app_newspaper_addThumbnailLetter', {'id': newspaper.id}) }}">Add Thumbnail Letter</a>
+    {% endif %}
     <p> All Journalists: </p>
     <ul>
         {% include 'journalist/_list.html.twig' with {'journalists': journalists} %}
@@ -12,6 +14,6 @@
 
     <p> All Articles: </p>
     <ul>
-        {% include 'article/_list.html.twig' with {'articles': newspaper.articles} %}
+        {% include 'article/_list.html.twig' with {'articles': articles} %}
     </ul>
 {% endblock %}

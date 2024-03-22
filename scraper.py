@@ -19,6 +19,7 @@ for feed_setting in feed_settings["feeds"]:
     feed = feedparser.parse(rss_feed)
 
     for post in feed.entries:
+        print(post.description if 'description' in post else "unkown")
         article = {
             "newspaper_name": feed.feed.title,
             "newspaper_link": feed.feed.link,
