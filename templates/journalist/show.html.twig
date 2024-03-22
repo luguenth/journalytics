@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Hello ArticleController!
+{% endblock %}
 
 {% block body %}
-    <h2>{{ journalist.name }}</h2>
+	<h2>{{ journalist.name }}
+		{% if journalist.isGeneric %}
+			(Generic)
+		{% endif %}
+	</h2>
 
-    <p>{{ journalist.name }} has written {{ journalist.articles|length }} article{% if journalist.articles|length > 1 %}s{% endif %}:</p>
-    {%include 'article/_list.html.twig' with {'articles': journalist.articles} %}
-    {% if newspapers|length == 0 %}
-        <p>Journalist {{ journalist.name }} has not written for any newspapers</p>
-    {% else %}
-        <p>Journalist {{ journalist.name }} has written for {{ newspapers|length }} newspaper{% if newspapers|length > 1 %}s{% endif %}:</p>
-        {%include 'newspaper/_list.html.twig' with {'newspapers': newspapers} %}
-    {% endif %}
-    
+	<p>{{ journalist.name }}
+		has written
+		{{ journalist.articles|length }}
+		article
+		{% if journalist.articles|length > 1 %}s
+		{% endif %}:</p>
+	{%include 'article/_list.html.twig' with {'articles': journalist.articles} %}
+	{% if newspapers|length == 0 %}
+		<p>Journalist
+			{{ journalist.name }}
+			has not written for any newspapers</p>
+	{% else %}
+		<p>Journalist
+			{{ journalist.name }}
+			has written for
+			{{ newspapers|length }}
+			newspaper
+			{% if newspapers|length > 1 %}s
+			{% endif %}:</p>
+		{%include 'newspaper/_list.html.twig' with {'newspapers': newspapers} %}
+	{% endif %}
 
-    <p>Go back to articles <a href="{{ path('app_article') }}">here</a></p>
+
+	<p>Go back to articles
+		<a href="{{ path('app_article') }}">here</a>
+	</p>
 
 {% endblock %}

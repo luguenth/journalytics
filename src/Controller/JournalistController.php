@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Journalist;
 use App\Entity\Newspaper;
+use Symfony\Component\HttpFoundation\Request;
 
 class JournalistController extends AbstractController
 {
@@ -25,7 +26,7 @@ class JournalistController extends AbstractController
     {
         // Get all the journalists from the database
         $journalists = $this->entityManager->getRepository(Journalist::class)->findBy([], ['name' => 'ASC']);
-        
+
         // Render the journalist page
         return $this->render('journalist/index.html.twig', [
             'journalists' => $journalists,
@@ -46,5 +47,43 @@ class JournalistController extends AbstractController
             'journalist' => $journalist,
             'newspapers' => $newspapers,
         ]);
+    }
+
+    #[Route('/journalist/{id}/mark', name: 'app_journalist_mark_as_generic')]
+    public function markAsGeneric(int $id, Request $request): Response
+    {
+        // Get the journalist from the database
+        $journalist = $this->entityManager->getRepository(Journalist::class)->find($id);
+
+        // Mark the journalist as generic
+        $journalist->setIsGeneric(true);
+
+        // Save the changes to the database
+        $this->entityManager->flush();
+
+        // Get the URL of the referring page
+        $referer = $request->headers->get('referer');
+
+        // Redirect back to the referring page
+        return $this->redirect($referer);
+    }
+
+    #[Route('/journalist/{id}/unmark', name: 'app_journalist_mark_as_not_generic')]
+    public function markAsNotGeneric(int $id, Request $request): Response
+    {
+        // Get the journalist from the database
+        $journalist = $this->entityManager->getRepository(Journalist::class)->find($id);
+
+        // Mark the journalist as not generic
+        $journalist->setIsGeneric(false);
+
+        // Save the changes to the database
+        $this->entityManager->flush();
+
+        // Get the URL of the referring page
+        $referer = $request->headers->get('referer');
+
+        // Redirect back to the referring page
+        return $this->redirect($referer);
     }
 }

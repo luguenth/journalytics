@@ -1,20 +1,27 @@
 <table>
-    <thead>
-        <tr>
-            <th>Journalists</th>
-            <th>NPs</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for journalist in journalists %}
-        <tr>
-            <td> <a href="{{ path('app_journalist_show', { 'id': journalist.id }) }}">{{ journalist.name }}</a></td>
-            <td>
-                {% for np in journalist.allNewspapers %}
-                    {% include 'newspaper/_tag.html.twig' with { 'newspaper': np } %}
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+	<thead>
+		<tr>
+			<th>Journalists</th>
+			<th>NPs</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for journalist in journalists %}
+			<tr>
+				<td>
+					{% include 'journalist/_single.html.twig' with { 'journalist': journalist } %}
+				</td>
+				<td>
+					{% set grouped_newspapers = journalist.allNewspapers|group_by('name') %}
+					{% for newspaper, duplicates in grouped_newspapers %}
+						{% include 'newspaper/_tag.html.twig' with { 'newspaper': duplicates[0] } %}
+						{% if duplicates|length > 1 %}
+							(+
+							{{ duplicates|length - 1 }})
+						{% endif %}
+					{% endfor %}
+				</td>
+			</tr>
+		</td>
+	</tbody>
+</tr>{% endfor %}</tbody></table>

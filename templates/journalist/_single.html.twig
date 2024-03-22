@@ -1,0 +1,27 @@
+{% if app.user %}
+	<div class="meta-actions">
+		<a href="{{ path('app_journalist_show', { 'id': journalist.id }) }}">{{ journalist.name }}</a>
+		<div class="actions">
+			{% if not journalist.isGeneric %}
+				<a href="{{ path('app_journalist_mark_as_generic', { 'id': journalist.id }) }}">📰</a>
+			{% else %}
+				<a href="{{ path('app_journalist_mark_as_not_generic', { 'id': journalist.id }) }}">👩‍💻</a>
+			{% endif %}
+		</div>
+	</div>
+{% else %}
+	<a href="{{ path('app_journalist_show', { 'id': journalist.id }) }}">{{ journalist.name }}
+		test</a>
+{% endif %}
+
+{% block stylesheets %}
+	<style>
+		.meta-actions:hover .actions {
+			display: inline;
+		}
+
+		.actions {
+			display: none;
+		}
+	</style>
+{% endblock %}

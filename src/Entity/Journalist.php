@@ -28,6 +28,9 @@ class Journalist
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'journalists')]
     private Collection $articles;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isGeneric = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -112,5 +115,17 @@ class Journalist
             $newspapers = array_merge($newspapers, $article->getNewspapers()->toArray());
         }
         return $newspapers;
+    }
+
+    public function isIsGeneric(): ?bool
+    {
+        return $this->isGeneric;
+    }
+
+    public function setIsGeneric(?bool $isGeneric): self
+    {
+        $this->isGeneric = $isGeneric;
+
+        return $this;
     }
 }
